@@ -1,0 +1,11 @@
+{% extends "layout.html"%}
+{% block searchcontent %}
+    <h1> Search Page</h1>
+    {%for info in restaurant_info%}
+    
+        <h1>{{info.business_name}} is at </h1>
+        <p>{{info.business_address}},{{info.business_state}} , {{info.business_city}} ,{{info.business_postal_code}} </p>
+
+    {%endfor%}
+
+{% endblock searchcontent %}
