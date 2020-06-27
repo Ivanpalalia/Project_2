@@ -5,44 +5,60 @@
 //used a cleaned up dataset to test, will connect to database once functionality works
 const url = "sf_cleaned_data3.json"
 
+
+// console.log(restPerZip)
+
+// function init(){
+    //grabs reference to the dropdown element
+var zipCode = d3.select("#selDataset").on("change", updatePlotly);
+
+function updatePlotly() {
+    // // Use D3 to select the dropdown menu
+    // var currentSelection = d3.select("#selDataset").node().value;
+    // // Assign the value of the dropdown menu option to a variable
+    // // var dataset = dropdownMenu.property("selected");
+
+    // // dropdownMenu.property("selected",123);
+
+    // console.log(currentSelection)
+    
+  
+    // //filter should be here
+    d3.json(url).then(buildCharts)
+}
+
+
+
+// d3.select("#selDataset").property("value",123)
+
+function optionChanged(zipCode) {
+   
+    console.log(zipCode);
+    
+  }
+
+
+
+
+function buildCharts(data){
+// d3.json(url).then( (data) => {
+
+//append list to dropdown
+// Object.entries(result).forEach(([key, value]) => {
+//     PANEL.append("h5").text(`${key.toUpperCase()}: ${value}`);
+//   });
 var name_array=[]
 var score_array=[]
 var restPerZip =[]
 var restZip=[]
 var restNumb =[]
 
-console.log(restPerZip)
-
-// function init(){
-    //grabs reference to the dropdown element
-var zipCode = d3.select("#selDataset");
-    
-// }
-
-function optionChanged(zipCode) {
-   
-    return(zipCode);
-    
-  }
-
-console.log(optionChanged(zipCode));
-
-// console.log(dropdown)
-
-// function buildCharts(sample){
-d3.json(url).then( (data) => {
-
-//append list to dropdown
-// Object.entries(result).forEach(([key, value]) => {
-//     PANEL.append("h5").text(`${key.toUpperCase()}: ${value}`);
-//   });
-
 
     //  filter object test
     console.log(data)
     //filter by zip code 
-    var zipValue = "94103";
-    
+    var zipValue = d3.select("#selDataset").node().value;
+    console.log(zipValue)
     function findZip(zip){
         return zip.business_postal_code === zipValue;
     }
@@ -80,9 +96,9 @@ d3.json(url).then( (data) => {
     }
     
     //
-    for (i=0; i< (Object.keys(data).length);i++) {
-        var name = data[i].business_name;
-        var score = data[i].inspection_score;
+    for (i=0; i< (Object.keys(filteredZip).length);i++) {
+        var name = filteredZip[i].business_name;
+        var score = filteredZip[i].inspection_score;
         // var risk = data[i].risk_category;
         var postalCode = data[i].business_postal_code;
     
@@ -112,9 +128,9 @@ d3.json(url).then( (data) => {
         restNumb.push(Object.values(counts)[i])
     }
 
-    console.log(counts)
-    console.log(restZip)
-    console.log(restNumb)
+    // console.log(counts)
+    // console.log(restZip)
+    // console.log(restNumb)
 
 
 
@@ -122,9 +138,9 @@ d3.json(url).then( (data) => {
 
     var score2 = score_array.slice(0,19)
     var name2 = name_array.slice(0,19)
-    // console.log(score2)
-    // console.log(name2)
-
+    console.log(score2)
+    console.log(name2)
+    
     var graph = [{
         
         // y:filteredBottom2.inspection_score,
@@ -144,8 +160,11 @@ d3.json(url).then( (data) => {
         xaxis: {
           tickangle: -45
         },
+        barmode: 'group'
         
       };
+
+     
       
     Plotly.newPlot('bar', graph, layout);
 
@@ -184,7 +203,8 @@ d3.json(url).then( (data) => {
       }];
 
     var layout = {
-        height: 400,
+        title: 'SF Restaurants Per ZIP Code',
+        height: 500,
         width: 500
     };
       
@@ -192,4 +212,7 @@ d3.json(url).then( (data) => {
 
    
     
-});
+}
+
+d3.json(url).then(buildCharts)
+
