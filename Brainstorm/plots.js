@@ -7,6 +7,11 @@ const url = "sf_cleaned_data3.json"
 
 var name_array=[]
 var score_array=[]
+var restPerZip =[]
+var restZip=[]
+var restNumb =[]
+
+console.log(restPerZip)
 
 // function init(){
     //grabs reference to the dropdown element
@@ -16,7 +21,6 @@ var zipCode = d3.select("#selDataset");
 
 function optionChanged(zipCode) {
    
-    
     return(zipCode);
     
   }
@@ -34,21 +38,17 @@ d3.json(url).then( (data) => {
 //   });
 
 
-
-
     //  filter object test
-    // console.log(data)
+    console.log(data)
     //filter by zip code 
     var zipValue = "94103";
     
     function findZip(zip){
         return zip.business_postal_code === zipValue;
     }
-
     function findTop(top){
         return top.inspection_score > 95;
     }
-
     function findBottom(bottom){
         return bottom.inspection_score <70;
     }
@@ -60,6 +60,15 @@ d3.json(url).then( (data) => {
     var filteredBottom2 = filteredBottom.slice(0,19)
 
     console.log(filteredZip.length);
+
+    //create zipcode array to plot # of restaurants per area
+
+    // var zipArray = ["94110","94103","94102","94109"]
+    // zipArray.forEach(element =>
+    //     numberRestaurant_1);
+    
+
+    
     
     //sort top 20 of filteredZip
 
@@ -74,23 +83,47 @@ d3.json(url).then( (data) => {
     for (i=0; i< (Object.keys(data).length);i++) {
         var name = data[i].business_name;
         var score = data[i].inspection_score;
-        var risk = data[i].risk_category;
+        // var risk = data[i].risk_category;
+        var postalCode = data[i].business_postal_code;
     
         name_array.push(name)
         score_array.push(score)
+        restPerZip.push(postalCode)
 
-        // var filteredZip = data[i].business_postal_code === "94134"
+        // var filteredZip = data[i].business_postal_code === "94134";
         // console.log(filteredZip)
     }
 
-        // console.log(risk)
+      
+    // determine # of zipcodes create object
+
+    const counts = Object.create(null);
+
+    restPerZip.forEach(element =>
+        counts[element] = counts[element] ? counts[element] +1 : 1);
+    
+
+    for(i=0; i< (Object.keys(counts).length);i++){    
+    restZip.push(Object.keys(counts)[i])
+    }
+
+    for(i=0; i< (Object.values(counts).length);i++){
+
+        restNumb.push(Object.values(counts)[i])
+    }
+
+    console.log(counts)
+    console.log(restZip)
+    console.log(restNumb)
+
+
 
     // make bar chart
 
     var score2 = score_array.slice(0,19)
     var name2 = name_array.slice(0,19)
-    console.log(score2)
-    console.log(name2)
+    // console.log(score2)
+    // console.log(name2)
 
     var graph = [{
         
@@ -118,29 +151,45 @@ d3.json(url).then( (data) => {
 
     //create bubble chart 
 
-        var bubbleLayout = {
-            title: "SF Restaurant Scores",
-            margin: { t: 0 },
-            hovermode: "closest",
-            xaxis: { title: "Restaurant Name" },
-            margin: { t: 100}
-          };
-        var bubbleData = [
-            {
-            x: name2,
-            y: score2,
-            text: name,
-            mode: "markers",
-            marker: {
-                size: score2,
-                color: score2,
-                colorscale: "Earth"
-            }
-        }
-    ];
+    //     var bubbleLayout = {
+    //         title: "SF Restaurant Scores",
+    //         margin: { t: 0 },
+    //         hovermode: "closest",
+    //         xaxis: { title: "Restaurant Name" },
+    //         margin: { t: 100}
+    //       };
+    //     var bubbleData = [
+    //         {
+    //         // x: name2,
+    //         // y: score2,
+    //         x: restZip,
+    //         y: restNumb,
+    //         text: name,
+    //         mode: "markers",
+    //         marker: {
+    //             size: score2,
+    //             color: score2,
+    //             colorscale: "Earth"
+    //         }
+    //     }
+    // ];
       
-    Plotly.newPlot("bubble", bubbleData, bubbleLayout);
+    // Plotly.newPlot("bubble", bubbleData, bubbleLayout);
    
+// Pie chart test
+    var data = [{
+        values: restNumb,
+        labels: restZip,
+        type: 'pie'
+      }];
 
+    var layout = {
+        height: 400,
+        width: 500
+    };
+      
+    Plotly.newPlot('bubble', data, layout);
+
+   
     
 });
