@@ -1,22 +1,49 @@
 {% extends "layout.html"%}
-{% block searchcontent %}
-    
-    
 
+{% block searchcontent %}
+
+ 
+ 
     <article class="media content-section">
         <div class="media-body">
-          <div class="article-metadata">
+            <div class="article-metadata">
             
-            <small class="text-muted">display</small>
-          </div>
-          {%for info in restaurant_info%}
-          <h2><a class="article-title" href="#">{{info.business_name}} is at </a></h2>
-          <p class="article-content">{{info.business_address}},{{info.business_state}} , {{info.business_city}} ,{{info.business_postal_code}} </p>
-          {%endfor%}
+                <small class="text-muted">Search your favorite restaurant</small>
+                <h1 class="display-4">Restaurants Ratings</h1>
+                <a class="btn btn-lg text-white" style="background-color:#c1440e;" href="/search" role="button">Display search UI Here </a>
+            </div>
         </div>
-      </article>
+    </article>
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+            
+                <small class="text-muted">Search your favorite restaurant</small>
+                
+            </div>
+        </div>
+    </article>
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+            
+                <small class="text-muted">Search your favorite restaurant</small>
+                
+            </div>
+        </div>
+    </article>
     
-    
-    
-
 {% endblock searchcontent %}
+<div class="col-md-4">
+    <div class="content-section">
+      <h3>Our Sidebar</h3>
+      <p class='text-muted'>You can put any information here you'd like.
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-light">Latest Posts</li>
+          <li class="list-group-item list-group-item-light">Announcements</li>
+          <li class="list-group-item list-group-item-light">Calendars</li>
+          <li class="list-group-item list-group-item-light">etc</li>
+        </ul>
+      </p>
+    </div>
+  </div>
