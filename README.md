@@ -13,3 +13,8 @@ cloud ( Atlas) which ends up pulling all data form the db. so wait for couple mi
 
 python app.py
 
+
+The rest API is avaiable at http://localhost:5000/getallbusiness
+
+Update map.html, stats.html, search.html accordingly 
+
