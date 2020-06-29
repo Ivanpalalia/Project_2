@@ -13,20 +13,9 @@ const url = "sf_cleaned_data3.json"
 var zipCode = d3.select("#selDataset").on("change", updatePlotly);
 
 function updatePlotly() {
-    // // Use D3 to select the dropdown menu
-    // var currentSelection = d3.select("#selDataset").node().value;
-    // // Assign the value of the dropdown menu option to a variable
-    // // var dataset = dropdownMenu.property("selected");
-
-    // // dropdownMenu.property("selected",123);
-
-    // console.log(currentSelection)
-    
   
-    // //filter should be here
     d3.json(url).then(buildCharts)
 }
-
 
 
 // d3.select("#selDataset").property("value",123)
@@ -38,15 +27,8 @@ function optionChanged(zipCode) {
   }
 
 
-
-
 function buildCharts(data){
-// d3.json(url).then( (data) => {
 
-//append list to dropdown
-// Object.entries(result).forEach(([key, value]) => {
-//     PANEL.append("h5").text(`${key.toUpperCase()}: ${value}`);
-//   });
 var name_array=[]
 var score_array=[]
 var restPerZip =[]
@@ -62,27 +44,19 @@ var restNumb =[]
     function findZip(zip){
         return zip.business_postal_code === zipValue;
     }
-    function findTop(top){
-        return top.inspection_score > 95;
-    }
-    function findBottom(bottom){
-        return bottom.inspection_score <70;
-    }
+    // function findTop(top){
+    //     return top.inspection_score > 95;
+    // }
+    // function findBottom(bottom){
+    //     return bottom.inspection_score <70;
+    // }
 
     var filteredZip = data.filter(findZip);
-    var filteredTop = data.filter(findTop);
-    var filteredBottom = data.filter(findBottom);
-
-    var filteredBottom2 = filteredBottom.slice(0,19)
+    // var filteredTop = data.filter(findTop);
+    // var filteredBottom = data.filter(findBottom);
+    // var filteredBottom2 = filteredBottom.slice(0,19)
 
     console.log(filteredZip.length);
-
-    //create zipcode array to plot # of restaurants per area
-
-    // var zipArray = ["94110","94103","94102","94109"]
-    // zipArray.forEach(element =>
-    //     numberRestaurant_1);
-    
 
     
     
@@ -91,23 +65,21 @@ var restNumb =[]
     // var Top_filter = filteredZip.sort(function(a, b){return a-b});
     // Top_filter = Top_filter.slice(0,20);
 
-    for (i=0; i<filteredBottom2.length;i++){
-        // console.log(filteredBottom2[i].inspection_score)
-    }
+    // for (i=0; i<filteredBottom2.length;i++){
+    //     // console.log(filteredBottom2[i].inspection_score)
+    // }
     
     //
     for (i=0; i< (Object.keys(filteredZip).length);i++) {
         var name = filteredZip[i].business_name;
         var score = filteredZip[i].inspection_score;
-        // var risk = data[i].risk_category;
         var postalCode = data[i].business_postal_code;
     
         name_array.push(name)
         score_array.push(score)
         restPerZip.push(postalCode)
 
-        // var filteredZip = data[i].business_postal_code === "94134";
-        // console.log(filteredZip)
+       
     }
 
       
@@ -136,10 +108,10 @@ var restNumb =[]
 
     // make bar chart
 
-    var score2 = score_array.slice(0,19)
-    var name2 = name_array.slice(0,19)
-    console.log(score2)
-    console.log(name2)
+    var score2 = score_array.slice(0,100)
+    var name2 = name_array.slice(0,100)
+    // console.log(score2)
+    // console.log(name2)
     
     var graph = [{
         
@@ -196,23 +168,46 @@ var restNumb =[]
     // Plotly.newPlot("bubble", bubbleData, bubbleLayout);
    
 // Pie chart test
-    var data = [{
-        values: restNumb,
-        labels: restZip,
-        type: 'pie'
-      }];
+    // var data = [{
+    //     values: restNumb,
+    //     labels: restZip,
+    //     type: 'pie'
+    //   }];
 
-    var layout = {
-        title: 'SF Restaurants Per ZIP Code',
-        height: 500,
-        width: 500
-    };
+    // var layout = {
+    //     title: 'SF Restaurants Per ZIP Code',
+    //     height: 500,
+    //     width: 500
+    // };
       
-    Plotly.newPlot('bubble', data, layout);
+    // Plotly.newPlot('bubble', data, layout);
 
-   
+    //Details table
+
+   //clears table data 
+
+    tbody.html("");
+
+    // Next, loop through each object in the data
+  // and append a row and cells for each value in the row
+  filteredZip.forEach((dataRow) => {
+    // Append a row to the table body
+    const row = tbody.append("tr");
+
+    // Loop through each field in the dataRow and add
+    // each value as a table cell (td)
+    Object.values(dataRow).forEach((val) => {
+      let cell = row.append("td");
+        cell.text(val);
+      }
+    );
+  });
+
+
     
 }
+
+const tbody = d3.select("tbody");
 
 d3.json(url).then(buildCharts)
 
