@@ -1,11 +1,49 @@
 {% extends "layout.html"%}
+
 {% block searchcontent %}
-    <h1> Search Page</h1>
-    {%for info in restaurant_info%}
+
+ 
+ 
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+            
+                <small class="text-muted">Search your favorite restaurant</small>
+                <h1 class="display-4">Restaurants Ratings</h1>
+                <a class="btn btn-lg text-white" style="background-color:#c1440e;" href="/search" role="button">Display search UI Here </a>
+            </div>
+        </div>
+    </article>
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+            
+                <small class="text-muted">Search your favorite restaurant</small>
+                
+            </div>
+        </div>
+    </article>
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+            
+                <small class="text-muted">Search your favorite restaurant</small>
+                
+            </div>
+        </div>
+    </article>
     
-        <h1>{{info.business_name}} is at </h1>
-        <p>{{info.business_address}},{{info.business_state}} , {{info.business_city}} ,{{info.business_postal_code}} </p>
-
-    {%endfor%}
-
 {% endblock searchcontent %}
+<div class="col-md-4">
+    <div class="content-section">
+      <h3>Our Sidebar</h3>
+      <p class='text-muted'>You can put any information here you'd like.
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-light">Latest Posts</li>
+          <li class="list-group-item list-group-item-light">Announcements</li>
+          <li class="list-group-item list-group-item-light">Calendars</li>
+          <li class="list-group-item list-group-item-light">etc</li>
+        </ul>
+      </p>
+    </div>
+  </div>
