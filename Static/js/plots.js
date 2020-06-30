@@ -1,7 +1,7 @@
 
 //define data set
 // const url = "sf_cleaned_data3.json"
-const url = "localhost:5000/getallbusiness"
+const url = "http://localhost:5000/getallbusiness"
 
 
 //grabs reference to the dropdown element and updates chart and table based on change
