@@ -8,6 +8,7 @@
   <title>San Francisco Restaurant Scores</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://uicdn.toast.com/tui.chart/latest/tui-chart.min.css">
+  <link rel="stylesheet" href="static/css/style.css">
 </head>
 
 <body>
@@ -31,8 +32,16 @@
             <option value="94102">94102</option>
             <option value="94121">94121</option>
             <option value="94109">94109</option>
-            
-            
+            <option value="94133">94133</option>
+            <option value="94122">94122</option>
+            <option value="94134">94134</option>
+            <option value="94111">94111</option>
+            <option value="94117">94117</option>
+            <option value="94118">94118</option>
+            <option value="94108">94108</option>
+            <option value="94123">94123</option>
+            <option value="94134">94134</option>
+             
           
           </select>
           
@@ -40,12 +49,12 @@
         </div>
         <!-- <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title">Demographic Info</h3> -->
+            <h3 class="panel-title"></h3> -->
           <!-- </div> -->
-          <div id="sample-metadata" class="panel-body"></div>
-        </div>
+          <!-- <div id="sample-metadata" class="panel-body"></div>
+        </div> -->
       </div>
-     
+      
       <div class="col-md-12">
         <div id="bar"></div>
       </div>
@@ -54,15 +63,34 @@
       </div> -->
     </div>
 
-    <div class="row">
-      <div class="col-md-12">
+    <!-- <div class="row">
+      <div class="col-md-6">
         <div id="bubble"></div>
       </div>
-      <div class="row">
+       <div class="row">
         <div class="col-md-12">
           <div id="chart"></div>
-        </div>
-    </div>
+        </div> 
+    </div> -->
+
+    <div class="col-md-12">
+      <div id="table-area" class="">
+        <table id="Zip-table" class="table table-striped">
+          <thead>
+            <tr>
+              <th class="table-head">Restaurant Name</th>
+              <th class="table-head">Location</th>
+              <th class="table-head">Inspection Type</th>
+              <th class="table-head">Details</th>
+              <th class="table-head">Inspection Score</th>
+              <th class="table-head">Comments</th>
+              <th class="table-head">ZIP Code</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>

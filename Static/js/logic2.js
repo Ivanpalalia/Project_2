@@ -27,16 +27,18 @@ var baseMaps = {
     Lightmap: lightmap,
 };
 
-<!--url = "https://data.sfgov.org/resource/pyih-qa8i.json?$where=business_latitude%20%3E%200";-->
-url= "http://localhost:5000/getallbusiness"
-d3.json(url, function(data) {
+localURL = "http://localhost:5000/getallbusiness"
+
+url = "https://data.sfgov.org/resource/pyih-qa8i.json?$where=business_latitude%20%3E%200";
+
+d3.json(localURL, function(data) {
+
     
     console.log(data);
 
     var High_Risk_Markers = L.markerClusterGroup();
     var Moderate_Risk_Markers = L.markerClusterGroup();
     var Low_Risk_Markers = L.markerClusterGroup();
-    var currentList;
     
 
     for (var index = 0; index < data.length; index++) {
@@ -45,15 +47,15 @@ d3.json(url, function(data) {
 
         if (stations.risk_category === "High Risk") {
             High_Risk_Markers.addLayer(L.marker([stations.business_latitude, stations.business_longitude])
-            .bindPopup("<h2>" + stations.business_name + "</h2><h3>Store Address : " + stations.business_address + "</h3><h3> Risk Factor : " + stations.risk_category + "</h3><h3> Violiation : " + stations.violation_description + "</h3>"));             
+            .bindPopup("<h2>" + stations.business_name + "</h2><h3>Store Address : " + stations.business_address + "</h3><h3> Risk Factor : " + stations.risk_category + "</h3><h3> Violiation : " + stations.violation_description + "</h3><a href='https://www.yelp.com/search?find_desc=" + stations.business_name + "&find_loc=San+Francisco%2C+CA&ns=1' target='blank'> Yelp search for " +  stations.business_name + "</a>"));           
         }       
         else if (stations.risk_category === "Moderate Risk") {
             Moderate_Risk_Markers.addLayer(L.marker([stations.business_latitude, stations.business_longitude])
-            .bindPopup("<h2>" + stations.business_name + "</h2><h3>Store Address : " + stations.business_address + "</h3><h3> Risk Factor : " + stations.risk_category + "</h3><h3> Violiation : " + stations.violation_description + "</h3>"));
+            .bindPopup("<h2>" + stations.business_name + "</h2><h3>Store Address : " + stations.business_address + "</h3><h3> Risk Factor : " + stations.risk_category + "</h3><h3> Violiation : " + stations.violation_description + "</h3><a href='https://www.yelp.com/search?find_desc=" + stations.business_name + "&find_loc=San+Francisco%2C+CA&ns=1' target='blank'> Yelp search for " +  stations.business_name + "</a>"));
         }
         else if (stations.risk_category === "Low Risk") {
             Low_Risk_Markers.addLayer(L.marker([stations.business_latitude, stations.business_longitude])
-            .bindPopup("<h2>" + stations.business_name + "</h2><h3>Store Address : " + stations.business_address + "</h3><h3> Risk Factor : " + stations.risk_category + "</h3><h3> Violiation : " + stations.violation_description + "</h3>"));
+            .bindPopup("<h2>" + stations.business_name + "</h2><h3>Store Address : " + stations.business_address + "</h3><h3> Risk Factor : " + stations.risk_category + "</h3><h3> Violiation : " + stations.violation_description + "</h3><a href='https://www.yelp.com/search?find_desc=" + stations.business_name + "&find_loc=San+Francisco%2C+CA&ns=1' target='blank'> Yelp search for " +  stations.business_name + "</a>"));
         }
     }
     var overlays = {
