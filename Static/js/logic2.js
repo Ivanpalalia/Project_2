@@ -27,11 +27,11 @@ var baseMaps = {
     Lightmap: lightmap,
 };
 
-yelpURL = "https://www.yelp.com/search?find_desc=Squat+and+Gobble+Cafe&find_loc=San+Francisco%2C+CA&ns=1"
+localURL = "http://localhost:5000/getallbusiness"
 
 url = "https://data.sfgov.org/resource/pyih-qa8i.json?$where=business_latitude%20%3E%200";
 
-d3.json(url, function(data) {
+d3.json(localURL, function(data) {
     
     console.log(data);
 
