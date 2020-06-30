@@ -1,47 +1,105 @@
-<!--<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">-->
-    {% extends "layout.html"%}
-    {% block statsview %}
-    <title>San Francisco Restaurant Health</title>
+<!DOCTYPE html>
+<html lang="en">
 
-    <!-- Leaflet JS & CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
-    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-    crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
-    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
-    crossorigin=""></script>
-   
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>San Francisco Restaurant Scores</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://uicdn.toast.com/tui.chart/latest/tui-chart.min.css">
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
 
-    <!-- d3 JavaScript -->
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+<body>
 
-   
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 jumbotron text-center">
+        <h2>San Francisco County Restaurant Health Inspection Data</h1>
+        <p>Use the interactive charts below to explore the dataset</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <div class="well">
+          <h5>SF Zipcodes:</h5>
+          <select id="selDataset">
+            <option value="94110">94110</option>
+            <option value="94103">94103</option>
+            <option value="94112">94112</option>
+            <option value="94115">94115</option>
+            <option value="94102">94102</option>
+            <option value="94121">94121</option>
+            <option value="94109">94109</option>
+            <option value="94133">94133</option>
+            <option value="94122">94122</option>
+            <option value="94134">94134</option>
+            <option value="94111">94111</option>
+            <option value="94117">94117</option>
+            <option value="94118">94118</option>
+            <option value="94108">94108</option>
+            <option value="94123">94123</option>
+            <option value="94134">94134</option>
+            
+            
+          
+          </select>
+          
+         
+        </div>
+        <!-- <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Demographic Info</h3> -->
+          <!-- </div> -->
+          <!-- <div id="sample-metadata" class="panel-body"></div>
+        </div> -->
+      </div>
+      
+      <div class="col-md-12">
+        <div id="bar"></div>
+      </div>
+      <!-- <div class="col-md-5">
+        <div id="gauge"></div>
+      </div> -->
+    </div>
 
-    <!-- Our CSS -->
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename = '/css/style.css')}}">
+    <!-- <div class="row">
+      <div class="col-md-6">
+        <div id="bubble"></div>
+      </div>
+       <div class="row">
+        <div class="col-md-12">
+          <div id="chart"></div>
+        </div> 
+    </div> -->
 
- <!-- </head>-->
- <!-- <body>-->
+    <div class="col-md-12">
+      <div id="table-area" class="">
+        <table id="Zip-table" class="table table-striped">
+          <thead>
+            <tr>
+              <th class="table-head">Restaurant Name</th>
+              <th class="table-head">Location</th>
+              <th class="table-head">Inspection Type</th>
+              <th class="table-head">Details</th>
+              <th class="table-head">Inspection Score</th>
+              <th class="table-head">Comments</th>
+              <th class="table-head">ZIP Code</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
 
-    <!-- map div -->
-    <div id="map"></div>
-    <!-- D3 JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>
-    <!-- Leaflet JavaScript -->
-    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
-    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
-    crossorigin=""></script>
-    <!-- Marker Cluster JS & CSS -->
-    <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
-    <!-- API key -->
-    <script type="text/javascript" src="static/js/config.js"></script>
-    <!-- JS  -->
-    <script type="text/javascript" src="static/js/logic2.js"></script>
-  <!--</body>-->
-<!--</html>-->
-{% endblock statsview %}
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="/Static/js/plots.js"></script>
+  <script src="https://uicdn.toast.com/tui.chart/latest/tui-chart.min.js"></script>
+  <!-- <script src="bonus.js"></script> -->
+
+</body>
+
+</html>
