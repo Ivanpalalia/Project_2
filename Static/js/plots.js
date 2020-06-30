@@ -2,7 +2,10 @@
 //define data set
 // const url = "sf_cleaned_data3.json"
 const url = "http://localhost:5000/getallbusiness"
+// const url = "https://data.sfgov.org/resource/pyih-qa8i.json?$where=business_latitude%20%3E%200"
 
+
+console.log(url)
 
 //grabs reference to the dropdown element and updates chart and table based on change
 var zipCode = d3.select("#selDataset").on("change", updatePlotly);
@@ -13,10 +16,15 @@ function updatePlotly() {
 
 function optionChanged(zipCode) {   
     console.log(zipCode);  
+    d3.json(url).then(buildCharts)
 }
 
 
-function buildCharts(data){
+
+d3.json(url, function(data) {
+
+
+// function buildCharts(data){
 
 var name_array=[]
 var score_array=[]
@@ -131,11 +139,12 @@ var restNumb =[]
 
 
     
-}
+})
+
 
 const tbody = d3.select("tbody");
 
-d3.json(url).then(buildCharts)
+
 
 
 //----extra
