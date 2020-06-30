@@ -27,8 +27,8 @@ var baseMaps = {
     Lightmap: lightmap,
 };
 
-url = "https://data.sfgov.org/resource/pyih-qa8i.json?$where=business_latitude%20%3E%200";
-
+<!--url = "https://data.sfgov.org/resource/pyih-qa8i.json?$where=business_latitude%20%3E%200";-->
+url= "http://localhost:5000/getallbusiness"
 d3.json(url, function(data) {
     
     console.log(data);
