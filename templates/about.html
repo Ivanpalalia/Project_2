@@ -2,5 +2,21 @@
 
 {% block aboutcontent %}
 
-    
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata">
+        
+            <small class="text-muted">About Page</small>
+            <h2><a class="article-title" href="#">Restaurant Health Scores of San Francisco District</a></h2>
+            <p class="article-content"><b>Contibutors: Namita Anandaram, Ivan Galicia,  Ronal Ho, Michael Trias</b></br>
+                For our project we looked at the restaurants around the San Francisco District and look at determine the quality of them by looking at their SF Health Score and the types of “Risk” factor they produce. We pulled our data from the San Francisco County datahub and we stored the database into MongoDB.  To help visualize our ideas we provided an interactive map, a D3 graph/statistics, and a search function to allow people to choose the area/zip code they want to view.  </p>
+            <p class="article-content"><b>The data is provided by San Francisco Data:
+https://data.sfgov.org/widgets/pyih-qa8i</b></p></br> <h3>Data Source </h3></br> Data from the website is loaded as CSV fle on to <b>MongoDB hosted on Atlas Cloud</b></br>
+Web pages make <b>REST API </b> call using the <b>URL :http://localhost:5000/getallbusiness </br>
+<h3>Application Design</h3></br>
+</p>
+
+        </div>
+    </div>
+</article>
 {% endblock aboutcontent %}
